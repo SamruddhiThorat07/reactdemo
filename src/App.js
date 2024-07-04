@@ -1,235 +1,282 @@
 import * as React from "react";
 
-const JobPreviewItem = ({ icon, label, value }) => (
-  <div className="job-preview-item">
-    <div className="job-preview-label">
-      <img src={icon} alt="" className="job-preview-icon" />
-      <div className="job-preview-text">{label}</div>
+const JobDetail = ({ title, postedDate, isOpen, location, salary, skills, language, jobType, experience, description, companyName, companySize, companyType, companySector, companyFunding, companyFoundedYear, companyFounders }) => (
+  <div className="job-detail">
+    <div className="job-header">
+      <h1 className="job-title">{title}</h1>
+      <div className="job-meta">
+        <span className="posted-date">{postedDate}</span>
+        {isOpen && (
+          <span className="job-status">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb6a9bc64d9cb149150c637fa1952b4d475bd7d78ee72634c36072d6439a3283?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="status-icon" />
+            <span className="status-text">Open</span>
+          </span>
+        )}
+      </div>
     </div>
-    <div className="job-preview-value">{value}</div>
+    <div className="job-location-salary">
+      <div className="location">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/54e26e79c78dfbc762855d407891062620011515c7c65d190a22ee44ee75d00b?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="location-icon" />
+        <span className="location-text">{location}</span>
+      </div>
+      <div className="salary">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2ba6f31a61e4a30256aba7b235a0e0e191baa497e0a1b88898c9949529016dba?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="salary-icon" />
+        <span className="salary-text">{salary}</span>
+      </div>
+    </div>
+    <div className="job-details-grid">
+      <div className="skills-section">
+        <h2 className="section-title">Skills Required</h2>
+        {skills.map((skill, index) => (
+          <div key={index} className="skill-item">
+            <img src={skill.icon} alt="" className="skill-icon" />
+            <span className="skill-name">{skill.name}</span>
+          </div>
+        ))}
+      </div>
+      <div className="language-section">
+        <h2 className="section-title">Preferred Language</h2>
+        <p className="z">{language}</p>
+      </div>
+      <div className="job-type-section">
+        <h2 className="section-title">Type</h2>
+        <p className="">{jobType}</p>
+      </div>
+      <div className="experience-section">
+        <h2 className="section-title">Years of Experience</h2>
+        <p className="experience-z">{experience}</p>
+      </div>
+    </div>
+    <section className="job-description">
+      <h2 className="section-title">About the job</h2>
+      <p className="description-text">{description}</p>
+    </section>
+    <div className="company-info">
+      <div className="company-header">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/03210e4a2fb2102c3114e74f8d8e4e6b44ff185098dfc32ed83a5e34ddf82478?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt={companyName} className="company-logo" />
+        <h2 className="company-name">{companyName}</h2>
+      </div>
+      <button className="follow-button">Follow</button>
+    </div>
+    <div className="company-details">
+      <div className="detail-item">
+        <h3 className="detail-title">Company size</h3>
+        <p className="detail-text">{companySize}</p>
+      </div>
+      <div className="detail-item">
+        <h3 className="detail-title">Type</h3>
+        <p className="detail-text">{companyType}</p>
+      </div>
+    </div>
+    <div className="company-details">
+      <div className="detail-item">
+        <h3 className="detail-title">Sector</h3>
+        <p className="detail-text">{companySector}</p>
+      </div>
+      <div className="detail-item">
+        <h3 className="detail-title">Funding</h3>
+        <p className="detail-text">{companyFunding}</p>
+      </div>
+    </div>
+    <div className="company-details">
+      <div className="detail-item">
+        <h3 className="detail-title">Founded In</h3>
+        <p className="detail-text">{companyFoundedYear}</p>
+      </div>
+      <div className="detail-item">
+        <h3 className="detail-title">Founded By</h3>
+        <p className="detail-text">
+          {companyFounders.map((founder, index) => (
+            <React.Fragment key={index}>
+              {index > 0 && ", "}
+              <a href={founder.link} target="_blank" rel="noopener noreferrer">{founder.name}</a>
+            </React.Fragment>
+          ))}
+        </p>
+      </div>
+    </div>
+    <p className="report-link">Report this listing</p>
   </div>
 );
 
-const SkillBadge = ({ icon, skill }) => (
-  <div className="skill-badge">
-    <img src={icon} alt="" className="skill-icon" />
-    <div className="skill-name">{skill}</div>
+const JobActions = ({ applicants, matches, messages, views }) => (
+  <div className="job-actions">
+    <div className="action-buttons">
+      <button className="delete-button">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7a20977487264abeb1fe5ce07a375fa98552f74f9ca8641187ba538fe4fd41b5?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="button-icon" />
+        Delete job
+      </button>
+      <button className="edit-button">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4d53752965dab031ea31f1ff4280413dfdabba19e15774278a85b22cf571e7db?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="button-icon" />
+        Edit job
+      </button>
+    </div>
+    <div className="job-stats">
+      <div className="stat-item">
+        <div className="stat-label">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/694c9e5de397271baffc36260d8f099da28cdb6d30bbe9c5fd6314e37c7191d0?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="stat-icon" />
+          <span>Applicants</span>
+        </div>
+        <span className="stat-value">{applicants}</span>
+      </div>
+      <div className="stat-item">
+        <div className="stat-label">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/57215f69027baeb036b9bb3b1235c74449b35cc7b53004b4b0421a1520b4682b?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="stat-icon" />
+          <span>Matches</span>
+        </div>
+        <span className="stat-value">{matches}</span>
+      </div>
+      <div className="stat-item">
+        <div className="stat-label">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ef6a45a2f56b05376a15bf58888d60ffca6e1af01593f36c7ec87c862b644208?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="stat-icon" />
+          <span>Messages</span>
+        </div>
+        <span className="stat-value">{messages}</span>
+      </div>
+      <div className="stat-item">
+        <div className="stat-label">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/88e77a815d442295466e04d70159d3fd8b9de94ee9930c2fe01ff5c3adc3e4c9?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="stat-icon" />
+          <span>Views</span>
+        </div>
+        <span className="stat-value">{views}</span>
+      </div>
+    </div>
+    <blockquote className="company-quote">"A quote from a Atlassian."</blockquote>
+    <div className="testimonial">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/22a691244e92eff32e2137846129301df2b92b60c8f235bcf5972fa681370666?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="testimonial-image" />
+      <div className="testimonial-content">
+        <h3 className="testimonial-name">Name</h3>
+        <p className="testimonial-description">Description</p>
+      </div>
+    </div>
   </div>
 );
 
-const InfoItem = ({ label, value }) => (
-  <div className="info-item">
-    <div className="info-label">{label}</div>
-    <div className="info-value">{value}</div>
-  </div>
+const Header = () => (
+  <header className="main-header">
+    <div className="logo">Logo</div>
+    <nav className="main-nav">
+      <div className="nav-item active">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1e3b408547ef03c865257d0980905eb901586dda7e61099422a6cead6267828?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="nav-icon" />
+        <span className="nav-text">Jobs</span>
+      </div>
+      <div className="nav-item">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b9933f52e9328c177180664dbc20a4ec5a7f904a01053644fde2a74a4cd77084?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="nav-icon" />
+        <span className="nav-text">Messages</span>
+      </div>
+      <div className="nav-item">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a9eeb37e186417dd6d50eeba4e946a97452c66ea7afd0d2d92671c38c59314e?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="nav-icon" />
+        <span className="nav-text">Payments</span>
+      </div>
+      <div className="nav-item">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4078043aeeee3c4b236a823d1c802793459fb003d9aa04cc418eb2f1ea20f3e8?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="nav-icon" />
+        <span className="nav-text">Application</span>
+      </div>
+    </nav>
+    <div className="user-menu">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/367ed6f107b5ed3ffba25a6d886f9b4e58fdaedb76dd42d2b9ebf0c4387e9561?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="User avatar" className="user-avatar" />
+      <div className="notification-icons">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/9ba421d868a00d7b906f876e3cd74995b014f6e2d8c3d7f49d7c53e3cce6471d?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="Notification" className="notification-icon" />
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5243645185fdd5e3b78109c12728fdc6d6e038af1fe4c32c7e7d418913a707cf?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="Settings" className="settings-icon" />
+      </div>
+    </div>
+  </header>
+);
+
+const JobTabs = () => (
+  <nav className="job-tabs">
+    <a href="#preview" className="tab-item active">Job preview</a>
+    <a href="#applicants" className="tab-item">Applicants</a>
+    <a href="#match" className="tab-item">Match</a>
+    <a href="#messages" className="tab-item">Messages</a>
+  </nav>
 );
 
 function MyComponent() {
-  const jobPreviewItems = [
-    { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/763d2c9e1343b10b91f3515675d63b674f5db056e47965255bdd0d921f25136a?apiKey=818aac2e915345b89dcb7c80bb502cc5&", label: "Applicants", value: "400" },
-    { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/799f788605a03e16cac90a139f7b6ee6592d965b1da9d4b33151641944d7a51b?apiKey=818aac2e915345b89dcb7c80bb502cc5&", label: "Matches", value: "100" },
-    { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/ffcf34c9784ce5638d907279f31f5164fb6e890233a4b9cbb71056df726450a8?apiKey=818aac2e915345b89dcb7c80bb502cc5&", label: "Messages", value: "147" },
-    { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/0ac801def6fe573b78b950c1629c9a6e9bb65cb77c9eb8f3a639d120e9565c0a?apiKey=818aac2e915345b89dcb7c80bb502cc5&", label: "Views", value: "800" }
-  ];
+  const jobData = {
+    title: "Senior Product Designer",
+    postedDate: "posted 2 days ago",
+    isOpen: true,
+    location: "Delaware, USA",
+    salary: "$300k-$400k",
+    skills: [
+      { name: "Figma", icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/d739b3eaab11d0222d1f91f9f3259f66d8a5c290314c3c82c265c3eb6a11ee02?apiKey=818aac2e915345b89dcb7c80bb502cc5&" },
+      { name: "Adobe Illustrator", icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/6256d422b46f75a054ed508ebd06b94deb7be12a6aaa573aac67e97c81e149cc?apiKey=818aac2e915345b89dcb7c80bb502cc5&" },
+      { name: "Adobe XD", icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/cb1dba8347bf66ab9edcf57127bf06b9cf617f4e5a83d4db2a3fca07e7958d55?apiKey=818aac2e915345b89dcb7c80bb502cc5&" }
+    ],
+    language: "English",
+    jobType: "Full time",
+    experience: "3+ Years of Experience",
+    description: `1. Handle the UI/UX research design
+2. Work on researching on latest web applications designs & trends
+3. Work on conceptualizing and visualizing
+4. Work on creating graphics content and other graphic related works
 
-  const skillsRequired = [
-    { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/485a922d2e7f8051ff1414b8c3d93960d3c768f0ac128a6e70a6090330544d2b?apiKey=818aac2e915345b89dcb7c80bb502cc5&", skill: "Figma" },
-    { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/e3eec25456b5bbb4cbbb2583a05b060cf296b8aad0eb8adc9f423eefd3500f9d?apiKey=818aac2e915345b89dcb7c80bb502cc5&", skill: "Adobe Illustrator" },
-    { icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/6e87b0b9463d82b767224e66708fe5b357b2d33f1519f0856b438b60aad05b6a?apiKey=818aac2e915345b89dcb7c80bb502cc5&", skill: "Adobe XD" }
-  ];
+Benefits:
+Health insurance
+Provident Fund
 
-  const jobInfo = [
-    { label: "Company size", value: "1k - 2k Employees" },
-    { label: "Type", value: "Private" },
-    { label: "Sector", value: "Information Technology, Infrastructure" },
-    { label: "Funding", value: "Bootstrapped" },
-    { label: "Founded In", value: "2019" },
-    { label: "Founded By", value: (
-      <>
-        <a href="https://www.google.com/search?sca_esv=2e8a42a989b18c72&sca_upv=1&sxsrf=ADLYWIJfOan6Il30oG_UZfuOgWJJQyy6jw:1718807486320&q=Scott+Farquhar&si=ACC90nwLLwns5sISZcdzuISy7t-NHozt8Cbt6G3WNQfC9ekAgGn2U5_lv-iJKoEW9GGV3oQ_U1KzHM3grBvdDJw8AP9jrnXyCRK6qNSYCb3jHdJP2aGUh_HIEtaCjacARkKoOWECb-5Ob0Mv9e_MI4c_vMY8PVDZWA6-OO6yqvbV1TIRgm4P4FtNTbK6rHh3ojk0CXz_ZgaKdVf6VpRiXhZ7YUAy8LzI5HMyryDEBGhju5Ama_FvECG7_qGa4tSKw7XIbHa99s9btrbgRBy-6z85_2p6BPYPhA%3D%3D&sa=X&sqi=2&ved=2ahUKEwip7KLt8OeGAxVBRmwGHTGjBGsQmxMoAXoECDYQAw" target="_blank" rel="noopener noreferrer">Scott Farquhar</a>,{" "}
-        <a href="https://www.google.com/search?sca_esv=2e8a42a989b18c72&sca_upv=1&sxsrf=ADLYWIJfOan6Il30oG_UZfuOgWJJQyy6jw:1718807486320&q=Mike+Cannon-Brookes&si=ACC90nwLLwns5sISZcdzuISy7t-NHozt8Cbt6G3WNQfC9ekAgJsvrQUWPOKZ8iETJQdvnbU2UFD7BVWUbHmvxqkn_X6fnbX-LLuIjmm9FYDOCdLoN8dDFvHE1HsZUhT6XIGTrbZRGGDIDstquY_yluK6YQX1NkHtmo0wsp8wVD7ouAbjfDvaQHjO4Iyd2AKnCQbPH8-Ah5otgNPwHcJ39HScqiWv6SVxYRXUiznwfdbns6uKnydurua8JyyTlcxFT3lPFMTAfAAzqy-x0DxflUh6aHFtCEgFOChGuNdxmDlND1wruAK7SbM%3D&sa=X&sqi=2&ved=2ahUKEwip7KLt8OeGAxVBRmwGHTGjBGsQmxMoAnoECDYQBA" target="_blank" rel="noopener noreferrer">Mike Cannon-Brookes</a>
-      </>
-    ) }
-  ];
+Schedule:
+Day shift
+
+Supplemental pay types:
+Performance bonus
+Yearly bonus
+
+Work Location: In person`,
+    companyName: "Atlassian",
+    companySize: "1k - 2k Employees",
+    companyType: "Private",
+    companySector: "Information Technology, Infrastructure",
+    companyFunding: "Bootstrapped",
+    companyFoundedYear: "2019",
+    companyFounders: [
+      { name: "Scott Farquhar", link: "https://www.google.com/search?sca_esv=2e8a42a989b18c72&sca_upv=1&sxsrf=ADLYWIJfOan6Il30oG_UZfuOgWJJQyy6jw:1718807486320&q=Scott+Farquhar&si=ACC90nwLLwns5sISZcdzuISy7t-NHozt8Cbt6G3WNQfC9ekAgGn2U5_lv-iJKoEW9GGV3oQ_U1KzHM3grBvdDJw8AP9jrnXyCRK6qNSYCb3jHdJP2aGUh_HIEtaCjacARkKoOWECb-5Ob0Mv9e_MI4c_vMY8PVDZWA6-OO6yqvbV1TIRgm4P4FtNTbK6rHh3ojk0CXz_ZgaKdVf6VpRiXhZ7YUAy8LzI5HMyryDEBGhju5Ama_FvECG7_qGa4tSKw7XIbHa99s9btrbgRBy-6z85_2p6BPYPhA%3D%3D&sa=X&sqi=2&ved=2ahUKEwip7KLt8OeGAxVBRmwGHTGjBGsQmxMoAXoECDYQAw" },
+      { name: "Mike Cannon-Brookes", link: "https://www.google.com/search?sca_esv=2e8a42a989b18c72&sca_upv=1&sxsrf=ADLYWIJfOan6Il30oG_UZfuOgWJJQyy6jw:1718807486320&q=Mike+Cannon-Brookes&si=ACC90nwLLwns5sISZcdzuISy7t-NHozt8Cbt6G3WNQfC9ekAgJsvrQUWPOKZ8iETJQdvnbU2UFD7BVWUbHmvxqkn_X6fnbX-LLuIjmm9FYDOCdLoN8dDFvHE1HsZUhT6XIGTrbZRGGDIDstquY_yluK6YQX1NkHtmo0wsp8wVD7ouAbjfDvaQHjO4Iyd2AKnCQbPH8-Ah5otgNPwHcJ39HScqiWv6SVxYRXUiznwfdbns6uKnydurua8JyyTlcxFT3lPFMTAfAAzqy-x0DxflUh6aHFtCEgFOChGuNdxmDlND1wruAK7SbM%3D&sa=X&sqi=2&ved=2ahUKEwip7KLt8OeGAxVBRmwGHTGjBGsQmxMoAnoECDYQBA" }
+    ]
+  };
+
+  const jobStats = {
+    applicants: 400,
+    matches: 100,
+    messages: 147,
+    views: 800
+  };
 
   return (
     <>
-      <header className="header">
-        <div className="logo">Logo</div>
-        <nav className="main-nav">
-          <div className="nav-item active">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1e3b408547ef03c865257d0980905eb901586dda7e61099422a6cead6267828?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="nav-icon" />
-            <div className="nav-text">Jobs</div>
-          </div>
-          <div className="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b9933f52e9328c177180664dbc20a4ec5a7f904a01053644fde2a74a4cd77084?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="nav-icon" />
-            <div className="nav-text">Messages</div>
-          </div>
-          <div className="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a9eeb37e186417dd6d50eeba4e946a97452c66ea7afd0d2d92671c38c59314e?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="nav-icon" />
-            <div className="nav-text">Payments</div>
-          </div>
-          <div className="nav-item">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4078043aeeee3c4b236a823d1c802793459fb003d9aa04cc418eb2f1ea20f3e8?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="nav-icon" />
-            <div className="nav-text">Application</div>
-          </div>
-        </nav>
-        <div className="user-menu">
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/367ed6f107b5ed3ffba25a6d886f9b4e58fdaedb76dd42d2b9ebf0c4387e9561?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="User avatar" className="user-avatar" />
-          <div className="notification-icons">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/9ba421d868a00d7b906f876e3cd74995b014f6e2d8c3d7f49d7c53e3cce6471d?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="Notification" className="notification-icon" />
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5243645185fdd5e3b78109c12728fdc6d6e038af1fe4c32c7e7d418913a707cf?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="Settings" className="settings-icon" />
+      <Header />
+      <main className="content-wrapper">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/fce3cea4a38cd1826540822981866b21cbe75485b9c1332f8cf92660554dd321?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="background-image" />
+        <div className="content-container">
+          <JobTabs />
+          <div className="job-content">
+            <JobDetail {...jobData} />
+            <JobActions {...jobStats} />
           </div>
         </div>
-      </header>
-
-      <nav className="sub-nav">
-        <div className="sub-nav-item active">Job preview</div>
-        <div className="sub-nav-item">Applicants</div>
-        <div className="sub-nav-item">Match</div>
-        <div className="sub-nav-item">Messages</div>
-      </nav>
-
-      <main className="main-content">
-        <section className="job-details">
-          <div className="job-header">
-            <h1 className="job-title">Senior Product Designer</h1>
-            <div className="job-meta">
-              <div className="job-posted">posted 2 days ago</div>
-              <div className="job-status">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b8bb268de65fc493223c279eb7d351af6a3d0099e41b00576edfdd89075010a8?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="status-icon" />
-                <div className="status-text">Open</div>
-              </div>
-            </div>
-          </div>
-          <div className="job-location-salary">
-            <div className="job-location">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7f47964ad9ba9e2c9f04293936dadcd2897a6df96032aedee0bd79761951b132?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="location-icon" />
-              <div className="location-text">Delaware, USA</div>
-            </div>
-            <div className="job-salary">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7886679e7eea391ef57ac84a5180ba7ae61193038d9f58f38e9f2724cc5c5f73?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="salary-icon" />
-              <div className="salary-text">$300k-$400k</div>
-            </div>
-          </div>
-          <div className="job-requirements">
-            <div className="skills-section">
-              <h2 className="section-title">Skills Required</h2>
-              {skillsRequired.map((skill, index) => (
-                <SkillBadge key={index} icon={skill.icon} skill={skill.skill} />
-              ))}
-            </div>
-            <div className="language-section">
-              <h2 className="section-title">Preferred Language</h2>
-              <div className="language">English</div>
-            </div>
-            <div className="job-type-section">
-              <h2 className="section-title">Type</h2>
-              <div className="job-type">Full time</div>
-            </div>
-            <div className="experience-section">
-              <h2 className="section-title">Years of Experience</h2>
-              <div className="experience">3+ Years of Experience</div>
-            </div>
-          </div>
-          <div className="job-description">
-            <h2 className="section-title">About the job</h2>
-            <p className="description-text">
-              1. Handle the UI/UX research design
-              <br />
-              2. Work on researching on latest web applications designs & <br />
-              trends
-              <br />
-              3. Work on conceptualizing and visualizing
-              <br />
-              4. Work on creating graphics content and other graphic related<br />
-               works
-              <br />
-              Benefits:
-              <ul><li>Health insurance</li><li>Provident Fund</li></ul>
-              
-              Schedule:
-              <ul><li>Day shift</li></ul>
-              Supplemental pay types:
-              <ul><li>Performance bonus</li></ul>
-              
-            </p>
-          </div>
-          <div className="company-info">
-            <div className="company-header">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/263bd40f8317ce206707ca1acc3e49aedbfc147e224410ac613ba8f7f977824f?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="Atlassian logo" className="company-logo" />
-              <div className="company-name">Atlassian</div>
-            </div>
-            <button className="follow-button">Follow</button>
-          </div>
-          {jobInfo.map((item, index) => (
-            <InfoItem key={index} label={item.label} value={item.value} />
-          ))}
-          <div className="report-link">Report this listing</div>
-        </section>
-        <aside className="job-actions">
-          <div className="action-buttons">
-            <button className="delete-button">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/242c65b879c8f08ca8677c94d94f3e970fb7be32885b99bbf43175887074dba8?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="button-icon" />
-              Delete job
-            </button>
-            <button className="edit-button">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3b2f80b165d32d8708ac5831230cc2902d2a600921b1c446850cac9c3c1adeba?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="" className="button-icon" />
-              Edit job
-            </button>
-          </div>
-          {jobPreviewItems.map((item, index) => (
-            <JobPreviewItem key={index} icon={item.icon} label={item.label} value={item.value} />
-          ))}
-          <div className="testimonial">
-            <p className="quote">"A quote from a Atlassian."</p>
-            <div className="author">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3f5d68abbe5bbad2dd8b54803242b45b16d36a625d990b7ce820d3b2939e2726?apiKey=818aac2e915345b89dcb7c80bb502cc5&" alt="Testimonial author" className="author-image" />
-              <div className="author-info">
-                <div className="author-name">Name</div>
-                <div className="author-description">Description</div>
-              </div>
-            </div>
-          </div>
-        </aside>
       </main>
-
       <style jsx>{`
-        .header {
-          box-shadow: 0 4px 4px 0 rgba(217, 217, 217, 0.1);
+        .main-header {
           background-color: #fff;
+          box-shadow: 0 4px 4px 0 rgba(217, 217, 217, 0.1);
           display: flex;
-          width: 100%;
-          justify-content: space-between;
           align-items: center;
-          padding: 26px 40px;
-        }
-        @media (max-width: 991px) {
-          .header {
-            padding: 20px;
-          }
+          justify-content: space-between;
+          padding: 21px 32px;
+          z-index: 10;
         }
         .logo {
           background-color: #e7e7e7;
           color: #dc4a2d;
-          padding: 9px 28px;
-          font: 700 20px Poppins, sans-serif;
-        }
-        @media (max-width: 991px) {
-          .logo {
-            padding: 9px 20px;
-          }
+          font-weight: 700;
+          font-size: 20px;
+          padding: 9px 26px;
         }
         .main-nav {
           display: flex;
           gap: 19px;
           font-size: 20px;
-          font-weight: 400;
-        }
-        @media (max-width: 991px) {
-          .main-nav {
-            flex-wrap: wrap;
-          }
         }
         .nav-item {
           display: flex;
@@ -238,19 +285,16 @@ function MyComponent() {
           color: #b0b0b0;
         }
         .nav-item.active {
+          background-color: #dc4a2d;
+          border: 2px solid #fcb4a5;
           border-radius: 49px;
           box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-          border: 2px solid rgba(252, 180, 165, 1);
-          background-color: #dc4a2d;
           color: #fff;
           padding: 14px 15px;
         }
         .nav-icon {
           width: 24px;
           height: 24px;
-        }
-        .nav-text {
-          font-family: Poppins, sans-serif;
         }
         .user-menu {
           display: flex;
@@ -270,77 +314,80 @@ function MyComponent() {
           width: 20px;
           height: 20px;
         }
-        .sub-nav {
-          border: 1px solid #e7e7e7;
+        .content-wrapper {
+          position: relative;
+          min-height: 1291px;
+          margin-top: -7px;
+          padding-top: 7px;
+        }
+        .background-image {
+          position: absolute;
+          inset: 0;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+        .content-container {
+          position: relative;
           background-color: #fff;
+          border: 1px solid #e7e7e7;
           display: flex;
+          flex-direction: column;
           padding: 21px 80px 2px;
+        }
+        .job-tabs {
+          display: flex;
+          gap: 20px;
+          margin-left: 20px;
           font-size: 20px;
           color: #888;
         }
-        @media (max-width: 991px) {
-          .sub-nav {
-            padding: 21px 20px 2px;
-          }
+        .tab-item {
+          text-decoration: none;
+          color: inherit;
         }
-        .sub-nav-item {
-          margin-right: 20px;
-          font-family: Poppins, sans-serif;
-        }
-        .sub-nav-item.active {
+        .tab-item.active {
           color: #dc4a2d;
-          position: relative;
         }
-        .sub-nav-item.active::after {
-          content: '';
-          position: absolute;
-          bottom: -20px;
-          left: 0;
-          width: 65px;
-          height: 2px;
-          background-color: #dc4a2d;
-        }
-        .main-content {
+        .job-content {
           display: flex;
-          padding: 0 80px;
+          gap: 20px;
+          justify-content: space-between;
+          padding: 0 12px 0 80px;
         }
-        @media (max-width: 991px) {
-          .main-content {
-            flex-direction: column;
-            padding: 0 20px;
-          }
-        }
-        .job-details {
+        .job-detail {
           flex: 1;
-          padding-right: 20px;
         }
         .job-header {
-          margin-bottom: 24px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
         .job-title {
           color: #3d3d3d;
-          font: 700 35px Poppins, sans-serif;
-          margin-bottom: 10px;
+          font-size: 35px;
+          font-weight: 700;
         }
         .job-meta {
           display: flex;
-          align-items: center;
           gap: 12px;
-          font-size: 14px;
+          align-items: center;
         }
-        .job-posted {
+        .posted-date {
           color: #888;
+          font-size: 14px;
         }
         .job-status {
           display: flex;
           align-items: center;
           gap: 4px;
-          border-radius: 9999px;
-          border: 1px solid #abef6;
           background-color: #ecfdf3;
+          border: 1px solid #abef6;
+          border-radius: 9999px;
           color: #067647;
+          font-size: 12px;
           font-weight: 500;
-          padding: 2px 8px;
+          padding: 2px 8px 2px 6px;
         }
         .status-icon {
           width: 8px;
@@ -349,12 +396,12 @@ function MyComponent() {
         .job-location-salary {
           display: flex;
           justify-content: space-between;
-          margin-bottom: 56px;
+          margin-top: 24px;
           font-size: 20px;
           color: #5d5d5d;
         }
-        .job-location,
-        .job-salary {
+        .location,
+        .salary {
           display: flex;
           align-items: center;
           gap: 8px;
@@ -364,24 +411,33 @@ function MyComponent() {
           width: 24px;
           height: 24px;
         }
-        .job-requirements {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 57px;
+        .job-details-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+          margin-top: 56px;
         }
         .section-title {
           color: #6e6d6d;
-          font: 400 14px Poppins, sans-serif;
+          font-size: 14px;
           margin-bottom: 8px;
         }
-        .skill-badge {
+          .skills-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+        .skill-item{
           display: flex;
           align-items: center;
           gap: 4px;
+          background-color: #fff;
+          border: 1px solid #d0d5dd;
           border-radius: 6px;
           box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.08) inset;
-          border: 1px solid #d0d5dd;
-          background-color: #fff;
+          color: #344054;
+          font-size: 12px;
           padding: 4px 6px;
           margin-bottom: 8px;
         }
@@ -389,28 +445,20 @@ function MyComponent() {
           width: 16px;
           height: 16px;
         }
-        .skill-name {
-          font: 400 12px Poppins, sans-serif;
-          color: #344054;
-        }
-        .language,
-        .job-type,
-        .experience {
-          color: #3d3d3d;
-          font: 400 16px Poppins, sans-serif;
-        }
         .job-description {
-          margin-bottom: 40px;
+          margin-top: 57px;
         }
         .description-text {
           color: #3d3d3d;
-          font: 400 16px/28px Poppins, -apple-system, Roboto, Helvetica, sans-serif;
+          font-size: 16px;
+          line-height: 28px;
+          white-space: pre-line;
         }
         .company-info {
           display: flex;
-          align-items: center;
           justify-content: space-between;
-          margin-bottom: 26px;
+          align-items: center;
+          margin-top: 97px;
         }
         .company-header {
           display: flex;
@@ -422,53 +470,45 @@ function MyComponent() {
           height: 40px;
         }
         .company-name {
-          font: 400 20px Poppins, sans-serif;
           color: #4f4f4f;
+          font-size: 20px;
         }
         .follow-button {
-          border-radius: 8px;
-          background-color: #e0ebf9;
           color: #003788;
-          font: 700 11px/150% Poppins, -apple-system, Roboto, Helvetica, sans-serif;
-          padding: 5px 15px;
-          border: none;
-          cursor: pointer;
+          font-size: 11px;
+          font-weight: 700;
         }
-        .info-item {
+        .company-details {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 26px;
+        }
+        .detail-item {
           display: flex;
           flex-direction: column;
-          margin-bottom: 24px;
         }
-        .info-label {
+        .detail-title {
           color: #6e6d6d;
-          font: 400 14px Poppins, sans-serif;
+          font-size: 14px;
         }
-        .info-value {
+        .detail-text {
           color: #3d3d3d;
-          font: 400 16px Poppins, sans-serif;
+          font-size: 16px;
           margin-top: 8px;
         }
         .report-link {
           color: #b0b0b0;
+          font-size: 12px;
           text-decoration: underline;
-          font: 400 12px Poppins, sans-serif;
           margin-top: 27px;
         }
         .job-actions {
           width: 300px;
-          padding-left: 24px;
-        }
-        @media (max-width: 991px) {
-          .job-actions {
-            width: 100%;
-            padding-left: 0;
-            margin-top: 40px;
-          }
         }
         .action-buttons {
           display: flex;
           gap: 16px;
-          margin-bottom: 24px;
+          margin-top: 17px;
         }
         .delete-button,
         .edit-button {
@@ -476,83 +516,116 @@ function MyComponent() {
           align-items: center;
           gap: 10px;
           border-radius: 8px;
-          font: 400 16px Poppins, sans-serif;
+          font-size: 16px;
           padding: 12px 24px;
-          border: none;
-          cursor: pointer;
         }
         .delete-button {
-          border: 1px solid #dc4a2d;
           background-color: #fef4f2;
+          border: 1px solid #dc4a2d;
           color: #dc4a2d;
         }
         .edit-button {
-          border: 2px solid #fed3ca;
           background-color: #dc4a2d;
+          border: 2px solid #fed3ca;
           color: #fff;
         }
         .button-icon {
           width: 20px;
           height: 20px;
         }
-        .job-preview-item {
+        .job-stats {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          margin-top: 24px;
+        }
+        .stat-item {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 16px 0;
-          border-bottom: 1px solid #e7e7e7;
+          padding: 10px;
         }
-        .job-preview-label {
+        .stat-label {
           display: flex;
           align-items: center;
           gap: 10px;
+          font-size: 16px;
+          color: #4f4f4f;
         }
-        .job-preview-icon {
+        .stat-icon {
           width: 20px;
           height: 20px;
         }
-        .job-preview-text {
-          font: 400 16px Poppins, sans-serif;
-          color: #4f4f4f;
-        }
-        .job-preview-value {
-          font: 400 20px Poppins, sans-serif;
+        .stat-value {
           color: #3d3d3d;
+          font-size: 20px;
+        }
+        .company-quote {
+          color: #000;
+          font-size: 20px;
+          font-weight: 500;
+          line-height: 150%;
+          margin-top: 77px;
         }
         .testimonial {
-          margin-top: 40px;
-          padding: 32px;
-          border-radius: 12px;
-          box-shadow: -4px 8px 20px 0 rgba(0, 0, 0, 0.1);
-          border: 1px solid #f7f7f7;
-          background-color: #fff;
-        }
-        .quote {
-          color: #000;
-          font: 500 20px/150% Poppins, sans-serif;
-          margin-bottom: 48px;
-        }
-        .author {
           display: flex;
-          align-items: center;
           gap: 16px;
+          margin-top: 50px;
         }
-        .author-image {
+        .testimonial-image {
           width: 45px;
           height: 45px;
           border-radius: 50%;
         }
-        .author-info {
+        .testimonial-content {
           display: flex;
           flex-direction: column;
         }
-        .author-name {
+        .testimonial-name {
           color: #000;
-          font: 500 16px Poppins, sans-serif;
+          font-size: 16px;
+          font-weight: 500;
         }
-        .author-description {
+        .testimonial-description {
           color: #828282;
-          font: 500 16px Poppins, sans-serif;
+          font-size: 16px;
+        }
+        @media (max-width: 991px) {
+          .main-header {
+            flex-wrap: wrap;
+            padding: 0 20px;
+          }
+          .logo {
+            padding: 0 20px;
+          }
+          .main-nav {
+            flex-wrap: wrap;
+          }
+          .content-container {
+            padding: 21px 20px 2px;
+          }
+          .job-tabs {
+            flex-wrap: wrap;
+          }
+          .job-content {
+            flex-direction: column;
+            padding: 0 20px;
+          }
+          .job-details-grid {
+            grid-template-columns: 1fr;
+          }
+          .company-info {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+          }
+          .company-details {
+            flex-direction: column;
+            gap: 20px;
+          }
+          .job-actions {
+            width: 100%;
+          }
         }
       `}</style>
     </>
